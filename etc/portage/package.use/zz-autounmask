@@ -1,0 +1,4 @@
+# package.use# required by media-sound/pulseaudio-15.0-r2::gentoo[alsa-plugin,alsa]
+# required by media-sound/pavucontrol-5.0-r1::gentoo
+# required by pavucontrol (argument)
+>=media-plugins/alsa-plugins-1.2.6 pulseaudio
