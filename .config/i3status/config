@@ -1,0 +1,72 @@
+general {
+  colors = true
+  color_good = "#a8f16c"
+  color_degraded = "#ffea61"
+  color_bad = "#ff5087"
+  interval = 1
+  separator = "::"
+}
+
+#order += "read_file UPTIME"
+order += "disk /"
+order += "cpu_usage"
+#order += "ethernet eno1"
+order += "wireless wlan0"
+order += "memory"
+order += "volume master"
+order += "time"
+order += "battery 0"
+
+disk "/" {
+  format = "/: %percentage_used"
+}
+
+cpu_usage {
+  format = "CPU: %usage"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
+ethernet eno1 {
+  format_up = "ETH: %ip (%speed)"
+  format_down = "ETH: down"
+}
+
+wireless wlan0 {
+  format_up = "%essid: %ip (%bitrate / %frequency)"
+  format_down = "W: down"
+}
+
+memory {
+  memory_used_method = classical
+  format="RAM: %used/%total"
+}
+
+
+time {
+  format = "%Y-%m-%d %H:%M:%S"
+}
+
+volume master {
+  format = "Vol: %volume"
+  format_muted = "Vol: Muted (%volume)"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+}
+
+read_file UPTIME {
+  format = "UP: %content"
+  path = "/proc/uptime"
+}
+
+battery 0 {
+  format = "%status %percentage %remaining %emptytime"
+  format_down = "No battery"
+  status_chr = "⚡ CHR"
+  status_bat = " BAT"
+  status_unk = "? UNK"
+  status_full = "☻ FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 40
+}
